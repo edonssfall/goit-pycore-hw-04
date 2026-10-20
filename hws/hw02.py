@@ -2,6 +2,11 @@ from share import check_path, parse_value
 
 
 def get_cats_info(path: str) -> list[dict[str, str | int]] | None:
+    """
+    make a list of dictionaries from file with cats data
+    :param path: existing path to file
+    :return: list with cats {id: <id:str>, name: <name:str>, age: <age:str>} or None on error
+    """
     cats = list()
     cats_keys = ['id', 'name', 'age']
     try:

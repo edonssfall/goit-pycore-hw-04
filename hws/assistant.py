@@ -7,6 +7,11 @@ CACHE = dict()
 
 
 def validate_args(*args) -> tuple[str, str]:
+    """
+    validate name and phone: check there are 2 args and validate them with regex
+    :param args: name: str, phone: str
+    :return: (name: str, phone: str) or raise
+    """
     if len(args) != 2:
         raise Exception(f"Can't parse args, because it only 2 args accepted: {args}")
     name, phone = args
@@ -18,6 +23,11 @@ def validate_args(*args) -> tuple[str, str]:
 
 
 def get_key(name: str):
+    """
+    search for a key in cache, ignoring case
+    :param name: contact name: str
+    :return: existing key in cache or None
+    """
     res = None
     l_name = name.lower()
     for key in CACHE.keys():
@@ -28,6 +38,11 @@ def get_key(name: str):
 
 
 def add_contact(*args) -> str | None:
+    """
+    add contact to cache or overwrite an existing one
+    :param args: name: str, phone: str
+    :return: answer to print or raise
+    """
     name, phone = validate_args(*args)
     if key := get_key(name):
         CACHE[key] = phone
@@ -37,6 +52,11 @@ def add_contact(*args) -> str | None:
 
 
 def change_contact(*args) -> str | None:
+    """
+    change contact in cache by name
+    :param args: name: str, phone: str
+    :return: answer to print or raise
+    """
     name, phone = validate_args(*args)
     if key := get_key(name):
         CACHE[key] = phone
@@ -45,6 +65,11 @@ def change_contact(*args) -> str | None:
 
 
 def show_phone(*args) -> str | None:
+    """
+    show phone by name
+    :param args: name: str
+    :return: phone: str or raise
+    """
     if len(args) != 1:
         raise Exception(f"Can't show contact, because of invalid args: {args}")
     name = args[0]
@@ -56,6 +81,10 @@ def show_phone(*args) -> str | None:
 
 
 def show_all() -> str:
+    """
+    show all contacts from cache, if there are any
+    :return: answer to print
+    """
     if CACHE:
         return ''.join(
             f"{Fore.BLUE if i % 2 == 0 else Fore.YELLOW}{name}: {phone}\n"
@@ -65,6 +94,11 @@ def show_all() -> str:
 
 
 def parse_input(user_input: str) -> tuple[str, list]:
+    """
+    split user input into a command (lowercase) and its args
+    :param user_input: user input
+    :return: (command: str, *args) or raise
+    """
     if not user_input.strip():
         raise Exception('Please enter a command.')
     cmd, *args = user_input.split()
@@ -73,6 +107,9 @@ def parse_input(user_input: str) -> tuple[str, list]:
 
 
 def main():
+    """
+    chatbot entry point: request-response loop
+    """
     print("Welcome to the assistant bot!")
     while True:
         try:

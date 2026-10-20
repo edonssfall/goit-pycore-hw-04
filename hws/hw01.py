@@ -2,6 +2,11 @@ from share import check_path, parse_value
 
 
 def total_salary(path: str) -> tuple[int, float | int] | None:
+    """
+    calculate total and average salary from file, only if all data in file is correct
+    :param path: existing path to file
+    :return: (total_salary: int, average_salary: float | int) or None on error
+    """
     total = 0
     c = 0
     try:
