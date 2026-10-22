@@ -19,6 +19,6 @@ def total_salary(path: str) -> tuple[int, float | int] | None:
                 salary = parse_value(s_line[1], int, 'salary')
                 total += salary
                 c += 1
-        return total, total // c
+        return total, total / c
     except Exception as e:
         print(f'Error total_salary: {e}')
